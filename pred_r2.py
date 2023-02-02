@@ -39,7 +39,8 @@ class r_squared:
         Calculation of the `Press Statistics <https://www.otexts.org/1580>`_
         """
         res = self.y_pred - self.y_true
-        if int(self.X.shape[1]) >= 2000:
+        if int(self.X.shape[1]) >= 2000: #dataset more than 2000 features will cause SVD error
+            #to demontrate the problem, in reality we dont need this if and else
             hat = self.X.iloc[:,:2000].dot(np.linalg.pinv(self.X.iloc[:,:2000]))
         else:
             hat = self.X.dot(np.linalg.pinv(self.X))
